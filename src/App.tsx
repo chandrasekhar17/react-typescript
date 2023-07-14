@@ -30,7 +30,7 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Greet name="Chandu" isLoggedIn={true} />} />
-          <Route path={RoutePaths.API} element={<API status="loading" />} />
+          <Route path={RoutePaths.API} element={<API status="fail" />} />
           <Route
             path={RoutePaths.Arrays}
             element={<Array profInfo={arrayObj} />}
