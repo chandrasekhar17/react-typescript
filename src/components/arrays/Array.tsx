@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { RoutePaths } from "../Routepaths";
+import { RoutePaths } from "../../Routepaths";
+import { useEffect } from "react";
 
 type info = {
   profInfo: {
@@ -13,6 +14,9 @@ export const Array = (props: info) => {
   const handleButton = () => {
     navigate(RoutePaths.Objects);
   };
+  useEffect(() => {
+    console.log("came to this route");
+  }, []);
   return (
     <>
       {props.profInfo.map((record) => {
@@ -25,6 +29,7 @@ export const Array = (props: info) => {
         );
       })}
       <button onClick={handleButton}>Go to Obj page</button>
+      <button onClick={() => navigate(-1)}> Go back</button>
     </>
   );
 };

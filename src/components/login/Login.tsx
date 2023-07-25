@@ -1,12 +1,13 @@
-import { useNavigate } from "react-router-dom";
-import { RoutePaths } from "../Routepaths";
+import { Outlet, useNavigate } from "react-router-dom";
+import { RoutePaths } from "../../Routepaths";
+import { useEffect } from "react";
 
 type IProps = {
   name: string;
   isLoggedIn: boolean;
 };
 
-export const Greet = (props: IProps) => {
+export const Login = (props: IProps) => {
   const navigate = useNavigate();
   const handlePage = () => {
     navigate(RoutePaths.Arrays);
@@ -19,6 +20,7 @@ export const Greet = (props: IProps) => {
         <h1>Welcome Stranger</h1>
       )}
       <button onClick={handlePage}>Go to Arrays Page</button>
+      <Outlet />
     </div>
   );
 };

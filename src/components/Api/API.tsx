@@ -1,16 +1,19 @@
 import { useNavigate } from "react-router-dom";
-import { RoutePaths } from "../Routepaths";
+import { RoutePaths } from "../../Routepaths";
 
 type statusProps = {
   status: string;
 };
 
 export const API = (props: statusProps) => {
+  let message: string = "";
   const navigate = useNavigate();
-  const handleButton = () => {
+  // const handleButton = () => {
+  //   navigate(RoutePaths.Hooks);
+  // };
+  function handleButton(): void {
     navigate(RoutePaths.Hooks);
-  };
-  let message;
+  }
   if (props.status === "loading") {
     message = "Data is being loaded";
   } else if (props.status === "success") {
@@ -23,6 +26,7 @@ export const API = (props: statusProps) => {
       <div>
         <h2>status - {message}</h2>
         <button onClick={handleButton}>Go to Hooks page</button>
+        <button onClick={() => navigate(-1)}> Go back</button>
       </div>
     </>
   );

@@ -1,17 +1,24 @@
+import { useState } from "react";
 import "./App.css";
 import { RoutePaths } from "./Routepaths";
-import { API } from "./components/API";
-import { Array } from "./components/Array";
-import { Greet } from "./components/Greet";
-import { Hooks } from "./components/Hooks";
-import { Objects } from "./components/Objects";
+import { API } from "./components/Api/API";
+import { Array } from "./components/arrays/Array";
+import { Login } from "./components/login/Login";
+import { Hooks } from "./components/hooks/Hooks";
+import { Objects } from "../src/components/objects/Objects";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Home } from "./Home";
 function App() {
+  interface arrayObjInterface {
+    name: string;
+    salary: number;
+  }
   const objects = {
     name: "Sekhar",
     age: 20,
   };
-  const arrayObj = [
+
+  const arrayObj: arrayObjInterface[] = [
     {
       name: "Chandu",
       salary: 23900,
@@ -27,21 +34,24 @@ function App() {
   ];
   return (
     <Router>
-      <div>
-        <Routes>
-          <Route path="/" element={<Greet name="Chandu" isLoggedIn={true} />} />
-          <Route path={RoutePaths.API} element={<API status="fail" />} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path={RoutePaths.login}
+          element={<Login name="Chandu" isLoggedIn={true} />}
+        >
+          <Route path={RoutePaths.API} element={<API status="fail" />}></Route>
           <Route
             path={RoutePaths.Arrays}
             element={<Array profInfo={arrayObj} />}
-          />
-          <Route path={RoutePaths.Hooks} element={<Hooks />} />
+          ></Route>
+          <Route path={RoutePaths.Hooks} element={<Hooks />}></Route>
           <Route
             path={RoutePaths.Objects}
             element={<Objects info={objects} />}
-          />
-        </Routes>
-      </div>
+          ></Route>
+        </Route>
+      </Routes>
     </Router>
   );
 }

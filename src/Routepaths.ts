@@ -1,7 +1,7 @@
 export const RoutePaths = {
-  Hooks: "/hooks",
-  Arrays: "/arrays",
-  API: "/apis",
-  Objects: "/objects",
-  Greet: "/",
+  login: "/login",
+  Hooks: "/login/hooks",
+  Arrays: "/login/arrays",
+  API: "/login/apis",
+  Objects: "/login/objects",
 };

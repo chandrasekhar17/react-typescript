@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { RoutePaths } from "../Routepaths";
+import { RoutePaths } from '../../Routepaths'
 
 type personInfo = {
   info: {
@@ -19,6 +19,8 @@ export const Objects = (props: personInfo) => {
         {" "}
         Hi {props.info.name}, you're {props.info.age} years old
         <button onClick={handleButton}>Go to Api page</button>
+        <button onClick={() => navigate(-1)}> Go back</button>
+
       </div>
     </>
   );
