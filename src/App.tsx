@@ -6,9 +6,42 @@ import { Array } from "./components/arrays/Array";
 import { Login } from "./components/login/Login";
 import { Hooks } from "./components/hooks/Hooks";
 import { Objects } from "../src/components/objects/Objects";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useParams,
+} from "react-router-dom";
 import { Home } from "./Home";
 function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path={RoutePaths.login}
+          element={<Login name="Chandu" isLoggedIn={true} />}
+        >
+          {/* <Route path={`:id`} element={<API status="fail" />}></Route>
+          <Route
+            path={`:Infoid`}
+            element={<Array profInfo={arrayObj} />}
+          ></Route>
+          <Route path={`:Hooksid`} element={<Hooks />}></Route>
+          <Route
+            path={`:Objectsid`}
+            element={<Objects info={objects} />}
+          ></Route> */}
+
+          <Route path=":id" element={<DynamicComponent />}></Route>
+        </Route>
+      </Routes>
+    </Router>
+  );
+}
+
+const DynamicComponent: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
   interface arrayObjInterface {
     name: string;
     salary: number;
@@ -32,28 +65,18 @@ function App() {
       salary: 38900,
     },
   ];
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path={RoutePaths.login}
-          element={<Login name="Chandu" isLoggedIn={true} />}
-        >
-          <Route path={RoutePaths.API} element={<API status="fail" />}></Route>
-          <Route
-            path={RoutePaths.Arrays}
-            element={<Array profInfo={arrayObj} />}
-          ></Route>
-          <Route path={RoutePaths.Hooks} element={<Hooks />}></Route>
-          <Route
-            path={RoutePaths.Objects}
-            element={<Objects info={objects} />}
-          ></Route>
-        </Route>
-      </Routes>
-    </Router>
-  );
-}
+
+  if (id === "1") {
+    return <API status="fail" />;
+  } else if (id === "2") {
+    return <Array profInfo={arrayObj} />;
+  } else if (id === "3") {
+    return <Hooks />;
+  } else if (id === "4") {
+    return <Objects info={objects} />;
+  } else {
+    return <div>Invalid ID</div>;
+  }
+};
 
 export default App;

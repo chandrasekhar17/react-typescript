@@ -1,13 +1,17 @@
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { RoutePaths } from "../../Routepaths";
 type AuthUser = {
   name: string;
   email: string;
 };
+
+type validType = "1" | "2" | "3" | "4";
+
 export const Hooks = () => {
   const [user, setUser] = useState<AuthUser | null>(null);
   const navigate = useNavigate();
+  const { id } = useParams<{ id: validType }>();
   const handleLogin = () => {
     setUser({
       name: "chandu",
@@ -16,7 +20,7 @@ export const Hooks = () => {
   };
   const handleLogout = () => {
     setUser(null);
-    navigate(RoutePaths.login);
+    navigate(`${RoutePaths.login}`);
   };
   return (
     <>
@@ -24,7 +28,7 @@ export const Hooks = () => {
         <button onClick={handleLogin}>Log In</button>
         <button onClick={handleLogout}>Log out</button> <br />
         logged in user name is {user?.name}, email is {user?.email}
-        <button onClick={() => navigate(-1)}> Go back</button>
+        {/* <button onClick={() => navigate(-1)}> Go back</button> */}
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { RoutePaths } from "../../Routepaths";
 import { useEffect } from "react";
 
@@ -11,12 +11,11 @@ type info = {
 
 export const Array = (props: info) => {
   const navigate = useNavigate();
+  type validType = "1" | "2" | "3" | "4";
+  const { id } = useParams<{ id: validType }>();
   const handleButton = () => {
-    navigate(RoutePaths.Objects);
+    navigate(`${RoutePaths.login}/${id ? id : ""}`);
   };
-  useEffect(() => {
-    console.log("came to this route");
-  }, []);
   return (
     <>
       {props.profInfo.map((record) => {
@@ -28,8 +27,8 @@ export const Array = (props: info) => {
           </div>
         );
       })}
-      <button onClick={handleButton}>Go to Obj page</button>
-      <button onClick={() => navigate(-1)}> Go back</button>
+      {/* <button onClick={handleButton}>Go to Obj page</button>
+      <button onClick={() => navigate(-1)}> Go back</button> */}
     </>
   );
 };
